@@ -65,7 +65,7 @@ module Amistad
     end
 
     # checks if a current user received invitation from given user
-    def invited_by?(user)
+    def given_invite_by?(user)
       user.friend_ids.include?(self.id) or user.pending_friend_ids.include?(self.id)
     end
 

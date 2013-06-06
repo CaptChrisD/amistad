@@ -146,7 +146,7 @@ module Amistad
     end
 
     # checks if a current user received invitation from given user
-    def invited_by?(user)
+    def given_invite_by?(user)
       friendship = find_any_friendship_with(user)
       return false if friendship.nil?
       friendship.friendable_id == user.id
