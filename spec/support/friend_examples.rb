@@ -133,15 +133,15 @@ shared_examples_for "a friend model" do
     end
 
     it "should check if a user has invited another user" do
-      @john.invited?(@jane).should be_true
-      @john.invited?(@james).should be_true
+      @john.gave_invite?(@jane).should be_true
+      @john.gave_invite?(@james).should be_true
     end
 
     it "should check if a user did not invite another user" do
-      @jane.invited?(@john).should be_false
-      @james.invited?(@john).should be_false
-      @john.invited?(@victoria).should be_false
-      @victoria.invited?(@john).should be_false
+      @jane.gave_invite?(@john).should be_false
+      @james.gave_invite?(@john).should be_false
+      @john.gave_invite?(@victoria).should be_false
+      @victoria.gave_invite?(@john).should be_false
     end
   end
 
