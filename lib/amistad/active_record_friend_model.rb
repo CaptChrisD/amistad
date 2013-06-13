@@ -173,7 +173,7 @@ module Amistad
     # and any additional ignored friends
     def not_potential_friends
       @not_potential_friends ||= begin
-        friends + blocked
+        friends + blocked + [self]
       end
     end
 
