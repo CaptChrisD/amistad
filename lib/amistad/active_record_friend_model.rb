@@ -149,8 +149,10 @@ module Amistad
     # Could have much better PERF with calculating only ids for all methods
     # instead of using full objects
 
+    # Find all friends of users friends then remove current friends and any
+    # blocked friendships
     def potential_friends
-      friends_of_a_friend - not_potential_friends
+      friends_of_friends - not_potential_friends
     end
 
     #Find all friends of direct Friends
