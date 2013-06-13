@@ -159,14 +159,14 @@ module Amistad
     def friends_of_friends
       foaf ||= []
       friends.each do |friend|
-        friendship = find_any_friendship_with(friend)
-        foaf << not_self_in_friendship(friendship, friend)
+        fs = find_any_friendship_with(friend)
+        foaf << not_self_in_friendship(fs, friend)
       end
       foaf.flatten
     end
 
     def not_self_in_friendship(friendship, user)
-      (friendship.friend == user) ? frendship.friendable : friendship.friend
+      (friendship.friend == user) ? friendship.friendable : friendship.friend
     end
 
     # returns all current friends (regardless of status)
