@@ -150,7 +150,7 @@ module Amistad
     # instead of using full objects
 
     def potential_friends
-      friends_of_a_friend - not_potential_friends
+      friends_of_a_friend & not_potential_friends
     end
 
     #Find all friends of direct Friends
