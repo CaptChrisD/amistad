@@ -150,16 +150,21 @@ module Amistad
     # instead of using full objects
 
     def potential_friends
-      friends_of_a_friend & not_potential_friends
+      friends_of_a_friend - not_potential_friends
     end
 
     #Find all friends of direct Friends
-    def friends_of_a_friend
+    def friends_of_friends
       foaf ||= []
       friends.each do |friend|
-        foaf << find_any_friendship_with(friend)
+        friendship = find_any_friendship_with(friend)
+        foaf << not_self_in_friendship(friendship, friend)
       end
       foaf.flatten
+    end
+
+    def not_self_in_friendship(friendship, user)
+      (friendship.friend == user) ? frendship.friendable : friendship.friend
     end
 
     # returns all current friends (regardless of status)
@@ -168,6 +173,14 @@ module Amistad
       @not_potential_friends ||= begin
         friends + blocked
       end
+    end
+
+    def mutual_friends(user)
+      friends & find_any_friendship_with(user) if self != user
+    end
+
+    def mutual_friends_count(user)
+      mutual_friends(user).count
     end
 
     # checks if a current user received invitation from given user
