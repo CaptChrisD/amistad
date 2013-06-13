@@ -145,6 +145,31 @@ module Amistad
       find_any_friendship_with(user).present?
     end
 
+    #### Potential Friends Addition ####
+    # Could have much better PERF with calculating only ids for all methods
+    # instead of using full objects
+
+    def potential_friends
+      friends_of_a_friend - not_potential_friends
+    end
+
+    #Find all friends of direct Friends
+    def friends_of_a_friend
+      foaf ||= []
+      friends.each do |friend|
+        foaf << find_any_friendship_with(friend)
+      end
+      foaf.flatten
+    end
+
+    # returns all current friends (regardless of status)
+    # and any additional ignored friends
+    def not_potential_friends
+      @not_potential_friends ||= begin
+        friends + blocked
+      end
+    end
+
     # checks if a current user received invitation from given user
     def given_invite_by?(user)
       friendship = find_any_friendship_with(user)
