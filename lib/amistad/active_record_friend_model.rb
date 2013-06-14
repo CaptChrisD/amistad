@@ -177,7 +177,7 @@ module Amistad
     end
 
     def mutual_friends(user)
-      friends & find_any_friendship_with(user) if self != user
+      friends & user.friends if self != user
     end
 
     def mutual_friends_count(user)
