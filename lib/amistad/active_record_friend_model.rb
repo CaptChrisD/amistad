@@ -159,8 +159,7 @@ module Amistad
     def friends_of_friends
       foaf ||= []
       friends.each do |friend|
-        fs = find_any_friendship_with(friend)
-        foaf << not_self_in_friendship(fs, friend)
+        foaf << friend.friends
       end
       foaf.flatten
     end
