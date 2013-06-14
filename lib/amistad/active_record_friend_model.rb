@@ -181,7 +181,7 @@ module Amistad
     end
 
     def mutual_friends_count(user)
-      mutual_friends(user).count
+      mutual_friends(user).count rescue 0
     end
 
     # checks if a current user received invitation from given user
